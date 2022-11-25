@@ -1,25 +1,25 @@
 # Ansible Set Up Process:
 ```
 1 Create 3 AWS ubuntu 18 instances
-2 Name the 1st one as controller and remaining 2 as server1 and server2
+2 Name the 1st one as controller (control node or Master server) and remaining 2 as server1 and server2 as manage nodes
 3 Establish Passwordless ssh from Controller(master server) to Server1 and Server2
-  a) Connect to server1 using git bash
-  b) Setup password for the default user
+  A.) Connect to server1
+  B.) Setup password for the default user
      sudo passwd ubuntu
-  c) Edit the ssh configuration file
+  C.) Edit the ssh configuration file
      sudo vim /etc/ssh/sshd_config
      Search for "PasswordAuthentication" and change it from no to yes
-  d) Restart ssh
+  D.) Restart ssh
      sudo service ssh restart
 	 
-    Note: Repeat the above steps from a to d on Server2 managed node
+    Note: Repeat the above steps from A. to D. on Server2 managed node also 
 	
-  e) Connect to Controller(master server) using git bash
-  f) Generate the ssh keys
+  E.) Now Connect to Controller(master server)
+  F.) Generate the ssh keys
      ssh-keygen
-  g) Copy the ssh keys
+  G.) Copy the ssh keys
      ssh-copy-id ubuntu@private_ip_of_server1
-     Repeat step g with ip address of Server2
+     Repeat step G. with ip address of Server2
 
 
 4 Installing Ansible
