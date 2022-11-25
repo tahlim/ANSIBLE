@@ -37,8 +37,21 @@
 5 To check the version of ansible
   ansible --version
 
-Ansible stores all the remote servers info in a file called as inventory file We should open this file and store the ip address of all the managed nodes here
+6 Ansible stores all the remote servers info in a file called as inventory file We should open this file and store the ip address of all the managed nodes here
+
 sudo vim /etc/ansible/hosts
 Here copy and paste the ip addresses of the managed nodes
+
+[webserver]
+173.82.115.165
+
+7 Testing connectivity to the servers:
+now you can ping the remote server by running below commands
+
+ansible -m ping all
+
+8 In the command above, all implies all hosts. To ping a specific host or group of hosts:
+
+ansible -m ping webserver
 ```
 
