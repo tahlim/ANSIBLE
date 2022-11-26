@@ -45,6 +45,8 @@ Here copy and paste private ip addresses of the managed nodes
 [webserver]
 172.31.6.221
 
+Note: vim /etc/ansible/ansible.cfg    ## We need to enable inventory and sudo user path from this conf file
+
 7 Testing connectivity to the servers:
 now you can ping the remote server by running below commands
 
