@@ -70,10 +70,13 @@ Here copy and paste private ip addresses of the managed nodes
 
 Note: vim /etc/ansible/ansible.cfg    ## We need to enable inventory and sudo user path from this conf file
 
-7 Testing connectivity to the servers:
+7 Test the connectivity to the servers ((Host pattern)):
 now you can ping and list the remote server ips by running below commands
 ansible all --list-hosts
 ansible webserver --list-hosts
+ansible webserver[0] --list-hosts
+ansible webserver[1] --list-hosts
+ansible webserver[-1] --list-hosts
 
 ansible -m ping all
 ansible -m ping webserver
