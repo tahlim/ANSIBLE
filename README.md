@@ -21,7 +21,6 @@
      ssh-copy-id ubuntu@private_ip_of_server1
      Repeat step G. with ip address of Server2
 
-
 4 Installing Ansible
   a) Update the apt repository
      sudo apt-get update
@@ -55,7 +54,8 @@ ansible -m ping all
 
 ansible -m ping webserver
 ```
-9 Grouping in inventory file
+
+Note: Grouping in inventory file if you want to do.
 
 sudo vim /etc/ansible/hosts
 ```
