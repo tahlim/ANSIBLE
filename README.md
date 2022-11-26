@@ -55,28 +55,39 @@ ansible -m ping all
 
 ansible -m ping webserver
 ```
-# ==================================================================
+# ======================================
 # Ansible perform remote configuration of servers in 3 ways
-```
-1 Ansible Ad Hoc command
-2 Ansible Playbooks
-3 Ansible Roles
-```
+- 1 Ansible Ad Hoc command
+- 2 Ansible Playbooks
+- 3 Ansible Roles
 # Syntax of Ad Hoc command
 ansible all/groupname/ipaddress -i /etc/ansible/hosts -m module_name -a  '    '
 
 # Command module
 Ansible command to see the memory info of all managed nodes
+- ansible all -i /etc/ansible/hosts -m command -a 'free'
+- /etc/ansible/hosts is the default inventory file and when using it is not necessary to use -i option
+- ansible all  -m command -a 'free'
+- Command module is the default module of ansible and when using it we need not give -m option
+- ansible all -a 'free'
 
-ansible all -i /etc/ansible/hosts -m command -a 'free'
+# Copy Module
+```
+Ansible command to copy a file into all managed nodes
+ansible all -m copy -a 'src=file1 dest=/tmp'
 
-/etc/ansible/hosts is the default inventory file and when using it is not necessary to use -i option
+Copy moulde can also copy directories along with their sub directories
+1 Create a chain of directories
+  mkdir -p d1/d2/d3/d4
 
-ansible all  -m command -a 'free'
+2 Copy this entire directory structure into the managed nodes
+  ansible all -m copy -a 'src=d1 dest=/home/ubuntu'
 
-Command module is the default module of ansible and when using it we need not give -m option
+Copy module can also change the ownership group ownership and permissions of files
+ansible all -m copy -a 'src=file1 dest=/tmp owner=Sai group=Ravi mode=760' -b
 
-ansible all -a 'free'
-
-# ==================================================================
+Copy module can also send some content into a file on the managed nodes
+ansible all -m copy -a 'content="Hello IntelliQUIt\n" dest=/tmp/file1' -b
+```
+# ========================================
 
