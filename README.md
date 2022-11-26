@@ -6,6 +6,26 @@
   A.) Connect to server1
   B.) Setup password for the default user
      sudo passwd ubuntu
+     
+     Note: if you want to make communication between "ansible" user then use below commands
+     
+     Connect to Controller node (master server) then run below command
+     sudo adduser ansible
+     sudo passwd ansible
+     sudo su - ansible
+     
+     Connect to manage node (Server1, Server2) then run below command
+     sudo adduser ansible
+     sudo passwd ansible
+     sudo su - ansible
+     
+     Connect to Controller node (master server) and Generate the ssh keys
+     sudo su - ansible
+     ssh-keygen
+     Copy the ssh keys
+     ssh-copy-id ansible@private_ip_of_server1
+     ssh sudo su - ansible
+     
   C.) Edit the ssh configuration file
      sudo vim /etc/ssh/sshd_config
      Search for "PasswordAuthentication" and change it from no to yes
@@ -22,6 +42,9 @@
      Repeat step G. with ip address of Server2
 
 4 Installing Ansible
+
+Note: It will only run on controller node
+
   a) Update the apt repository
      sudo apt-get update
   b) Install software-properties-common
