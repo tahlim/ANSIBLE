@@ -40,10 +40,10 @@
   store the ip address of all the managed nodes here
 
 sudo vim /etc/ansible/hosts
-Here copy and paste the ip addresses of the managed nodes
+Here copy and paste private ip addresses of the managed nodes
 
 [webserver]
-173.82.115.165
+172.31.6.221
 
 7 Testing connectivity to the servers:
 now you can ping the remote server by running below commands
