@@ -55,12 +55,28 @@ ansible -m ping all
 
 ansible -m ping webserver
 ```
+9 Grouping in inventory file
+
+sudo vim /etc/ansible/hosts
+```
+[webserver]
+172.31.56.218
+172.31.51.60
+[appserver]
+172.31.45.55
+[dbserver]
+172.31.44.34
+172.31.51.60
+[servers:children]
+appserver
+dbserver
+```
 # ======================================
 # Ansible perform remote configuration of servers in 3 ways
 - 1 Ansible Ad Hoc command
 - 2 Ansible Playbooks
 - 3 Ansible Roles
-# Syntax of Ad Hoc command
+# 1. Syntax of Ad Hoc command
 ansible all/groupname/ipaddress -i /etc/ansible/hosts -m module_name -a  '    '
 
 # Command module
@@ -90,4 +106,51 @@ Copy module can also send some content into a file on the managed nodes
 ansible all -m copy -a 'content="Hello IntelliQUIt\n" dest=/tmp/file1' -b
 ```
 # ========================================
-
+# 2. Ansible Playbooks
+- Ansible playbook to create a file
+vim playbook1.yml
+```
+---
+- name: Create a file
+  hosts: all
+  tasks:
+   - name: Creating a file on servers
+     file:
+      name: /tmp/file100
+      state: touch
+...
+```
+- To check if the above playbook is syntactically correct
+- ansible-playbook playbook1.yml --syntax-check
+- To execute the playbook
+- ansible-playbook playbook1.yml
+======================================================
+- Ansible playbook to configure apache2
+vim playbook2.yml
+```
+---
+- name: Configuring apache2
+  hosts: all
+  tasks:
+   - name: Install apache2
+     apt:
+      name: apache2
+      state: present
+   - name: Edit the index.html file
+     copy:
+      content: "Welcome IntelliQIT\n"
+      dest: /var/www/html/index.html
+   - name: Restart apache2
+     service:
+      name: apache2
+      state: restarted
+   - name: Check url response of server1
+     uri:
+      url: http://172.31.83.146
+      status_code: 200
+   - name: Check the url response of server2
+     uri:
+      url: http://172.31.86.204
+      status_code: 200
+```
+ansible-playbook playbook2.yml
