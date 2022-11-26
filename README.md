@@ -37,7 +37,8 @@
 5 To check the version of ansible
   ansible --version
 
-6 Ansible stores all the remote servers info in a file called as inventory file We should open this file and store the ip address of all the managed nodes here
+6 Ansible stores all the remote servers info in a file called as inventory file We should open this file and 
+  store the ip address of all the managed nodes here
 
 sudo vim /etc/ansible/hosts
 Here copy and paste the ip addresses of the managed nodes
@@ -54,4 +55,25 @@ ansible -m ping all
 
 ansible -m ping webserver
 ```
+=============================================================
+# Ansible perform remote configuration of servers in 3 ways
+```
+1 Ansible Ad Hoc command
+2 Ansible Playbooks
+3 Ansible Roles
+```
+Syntax of Ad Hoc command
+--------------------------
+ansible all/groupname/ipaddress -i /etc/ansible/hosts -m module_name -a  '    '
+
+Command module
+--------------------
+Ansible command to see the memory info of all managed nodes
+ansible all -i /etc/ansible/hosts -m command -a 'free'
+
+/etc/ansible/hosts is the default inventory file and when using it is not necessary to use -i option
+ansible all  -m command -a 'free'
+
+Command module is the default module of ansible and when using it we need not give -m option
+ansible all -a 'free'
 
