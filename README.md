@@ -80,13 +80,14 @@ dbserver
 ansible all/groupname/ipaddress -i /etc/ansible/hosts -m module_name -a  '    '
 
 # Command module
-Ansible command to see the memory info of all managed nodes
+```
+- Ansible command to see the memory info of all managed nodes
 - ansible all -i /etc/ansible/hosts -m command -a 'free'
 - /etc/ansible/hosts is the default inventory file and when using it is not necessary to use -i option
 - ansible all  -m command -a 'free'
 - Command module is the default module of ansible and when using it we need not give -m option
 - ansible all -a 'free'
-
+```
 # Copy Module
 ```
 Ansible command to copy a file into all managed nodes
@@ -153,4 +154,4 @@ vim playbook2.yml
       url: http://172.31.86.204
       status_code: 200
 ```
-ansible-playbook playbook2.yml
+- ansible-playbook playbook2.yml
